@@ -1,51 +1,53 @@
 <img align="right" width="160" alt="showtime tab view logo" src="./example/assets/icon.png" />
 <div >
   <h1>Showtime Tab View</h1>
-
 </div>
 
-A react native component, support collapse header and custom refresh control, power by [Reanimated v2](https://docs.swmansion.com/react-native-reanimated/) & [GestureHandler V2](https://docs.swmansion.com/react-native-gesture-handler/docs/).
+A React Native component that supports a collapsible header and custom refresh control, powered by [Reanimated v2](https://docs.swmansion.com/react-native-reanimated/) and [GestureHandler V2](https://docs.swmansion.com/react-native-gesture-handler/docs/).
 <video align="right" width="160" alt="This library helped you? Consider sponsoring!" src="https://user-images.githubusercontent.com/37520667/212389901-764422ef-cf1b-48fc-87af-cfbe7ad1f6e2.mp4" />
 
 ## What
 
-This is a react native tab view component, it wraps gestures and animations on top of [react-native-tab-view](https://github.com/react-navigation/react-navigation/tree/main/packages/react-native-tab-view#readme), source code in [here](https://github.com/showtime-xyz/showtime-frontend/tree/staging/packages/design-system/collapsible-tab-view) before.
-
-you can see this [context on Twitter](https://twitter.com/alan_toa/status/1564429150152458241).
+This is a React Native tab view component that wraps gestures and animations on top of [react-native-tab-view](https://github.com/react-navigation/react-navigation/tree/main/packages/react-native-tab-view#readme). The source code can be found [here](https://github.com/showtime-xyz/showtime-frontend/tree/staging/packages/design-system/collapsible-tab-view). You can see this [context on Twitter](https://twitter.com/alan_toa/status/1564429150152458241).
 
 ## Features
 
-- Collapse header.
-- Support [FlashList](https://shopify.github.io/flash-list/). \*(see [this](./example/src/tab-flash-list/index.tsx))
-- Custom fresh control.
-- Support bounces effect on iOS.
-- Support iOS & Android & Web.
-- Zoom header when pull refresh. \*(see this [thread](https://github.com/showtime-xyz/showtime-frontend/discussions/1471))
+- Collapsible header.
+- Support for [FlashList](https://shopify.github.io/flash-list/). *(see [this](./example/src/tab-flash-list/index.tsx))
+- Custom refresh control.
+- Bounce effect support on iOS.
+- Support for iOS, Android, and Web.
+- Zoom header when pulling to refresh. *(see this [thread](https://github.com/showtime-xyz/showtime-frontend/discussions/1471))
 
 ## Installation
 
-First things you should follow installation instructions of:
+Before installing this package, you should first follow the installation instructions for:
 
 - [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/)
 - [react-native-gesture-handler v2](https://docs.swmansion.com/react-native-gesture-handler/)
 - [react-native-pager-view](https://docs.expo.dev/versions/latest/sdk/view-pager/)
 
-and then
+FlashList is not a required dependency, but for optimal performance, it is recommended to use FlashList instead of the standard FlatList implementation
+
+- [FlashList by Shopify](https://shopify.github.io/flash-list/docs/)
+
+
+And then, you can install the package using the following command:
 
 ```sh
 yarn add showtime-tab-view
 ```
 
-## Example
+## Examples
 
-- [basic example.](./example//src/example.tsx)
-- [zoom effect when pull refresh example.](https://github.com/Daavidaviid/showtime-scrollview-with-zoom-pull-to-refresh)
-- [showtime profile example](https://github.com/showtime-xyz/showtime-frontend/tree/staging/packages/app/components/profile)
-- ...more will come soon!
+- [Basic Example](./example//src/example.tsx)
+- [Zoom Effect with Pull-To-Refresh](https://github.com/Daavidaviid/showtime-scrollview-with-zoom-pull-to-refresh)
+- [Showtime Profile Example](https://github.com/showtime-xyz/showtime-frontend/tree/staging/packages/app/components/profile)
+- ...more to come!
 
 ## Usage
 
-mostly API is same with [react-native-tab-view](https://github.com/react-navigation/react-navigation/tree/main/packages/react-native-tab-view#readme), I just added some props on top of it, basic:
+The API for this package is similar to [react-native-tab-view](https://github.com/react-navigation/react-navigation/tree/main/packages/react-native-tab-view#readme), with extended props. A basic usage example is shown below:
 
 ```tsx
 import React, { useCallback, useState } from "react";
@@ -132,15 +134,17 @@ export function Example() {
 
 ## API
 
-...
+... API documentation will be available soon. 🔜
 
-Will come soon! 🔜
 
 ## Contributing
 
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+To learn how to contribute to this repository and understand the development workflow, please refer to the [contributing guide](CONTRIBUTING.md).
 
-Special thanks [@Daavidaviid](https://github.com/Daavidaviid) to try [zoom header effect when pull to refresh](https://github.com/showtime-xyz/showtime-frontend/discussions/1471).
+
+## Shoutout
+
+Special thanks to [@Daavidaviid](https://github.com/Daavidaviid) for experimenting with the [zoom header effect with pull-to-refresh](https://github.com/showtime-xyz/showtime-frontend/discussions/1471).
 
 ## License
 
