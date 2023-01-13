@@ -1,16 +1,20 @@
-<img align="right" width="160" alt="This library helped you? Consider sponsoring!" src="./example/assets/icon.png">
+<img align="right" width="160" alt="showtime tab view logo" src="./example/assets/icon.png" />
 <div >
   <h1>Showtime Tab View</h1>
 
 </div>
 
-A react native component, support collapse header and custom refresh control, power by [Reanimated v2](https://docs.swmansion.com/react-native-reanimated/) & [GestureHandler V2](https://docs.swmansion.com/react-native-gesture-handler/docs/).
+A react native component, support collapse header and custom refresh control, power by [Reanimated v2](https://docs.swmansion.com/react-native-reanimated/) & [GestureHandler V2](https://docs.swmansion.com/react-native-gesture-handler/docs/). 
+<video align="right" width="160" alt="This library helped you? Consider sponsoring!" src="https://user-images.githubusercontent.com/37520667/212389901-764422ef-cf1b-48fc-87af-cfbe7ad1f6e2.mp4" /> 
+
+
 
 ## What
 
 This is a react native tab view component, it wraps gestures and animations on top of [react-native-tab-view](https://github.com/react-navigation/react-navigation/tree/main/packages/react-native-tab-view#readme), source code in [here](https://github.com/showtime-xyz/showtime-frontend/tree/staging/packages/design-system/collapsible-tab-view) before.
 
-you can see this [context on Twitter](https://twitter.com/alan_toa/status/1564429150152458241).
+you can see this [context on Twitter](https://twitter.com/alan_toa/status/1564429150152458241). 
+
 
 ## Features
 
@@ -124,11 +128,17 @@ export function Example() {
 }
 ```
 
+## API 
+
+...  
+
+Will come soon! 🔜 
+
 ## Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
 
-Special thanks @Daavidaviid to try [zoom header effect when pull to refresh](https://github.com/showtime-xyz/showtime-frontend/discussions/1471).
+Special thanks [@Daavidaviid](https://github.com/Daavidaviid) to try [zoom header effect when pull to refresh](https://github.com/showtime-xyz/showtime-frontend/discussions/1471).
 
 ## License
 
