@@ -1,11 +1,14 @@
 import React from "react";
-import { FlatList as RNFlatList, FlatListProps } from "react-native";
+import { FlatList as RNFlatList, FlatListProps, Platform } from "react-native";
 
 import Animated from "react-native-reanimated";
 
 import { SceneComponent } from "../scene";
 
-const AnimatePageView = Animated.createAnimatedComponent(RNFlatList);
+const AnimatePageView =
+  Platform.OS === "web"
+    ? RNFlatList
+    : Animated.createAnimatedComponent(RNFlatList);
 export type TabFlatListProps<T> = FlatListProps<T> & {
   index: number;
 };

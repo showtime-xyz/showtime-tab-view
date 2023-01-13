@@ -1,11 +1,18 @@
 import React from "react";
-import { SectionList as RNSectionList, SectionListProps } from "react-native";
+import {
+  Platform,
+  SectionList as RNSectionList,
+  SectionListProps,
+} from "react-native";
 
 import Animated from "react-native-reanimated";
 
 import { SceneComponent } from "../scene";
 
-const AnimatePageView = Animated.createAnimatedComponent(RNSectionList);
+const AnimatePageView =
+  Platform.OS === "web"
+    ? RNSectionList
+    : Animated.createAnimatedComponent(RNSectionList);
 export type TabSectionListProps<T, SectionT> = SectionListProps<T, SectionT> & {
   index: number;
 };

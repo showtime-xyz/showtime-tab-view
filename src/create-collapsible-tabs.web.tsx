@@ -6,7 +6,6 @@ import React, {
 } from "react";
 import { LayoutChangeEvent, StyleSheet, View } from "react-native";
 
-import { useSharedValue } from "react-native-reanimated";
 import {
   NavigationState,
   SceneRendererProps,
@@ -56,11 +55,11 @@ function CollapsibleHeaderTabView<T extends Route>(
   }: HeaderTabViewProps<T>,
   ref?: any
 ) {
-  const shareAnimatedValue = useSharedValue(0);
-  const headerTrans = useSharedValue(0);
-  const curIndexValue = useSharedValue(navigationState.index);
-  const isSlidingHeader = useSharedValue(false);
-  const isStartRefreshing = useSharedValue(false);
+  const shareAnimatedValue = { value: 0 };
+  const headerTrans = { value: 0 };
+  const curIndexValue = { value: 0 };
+  const isSlidingHeader = { value: false };
+  const isStartRefreshing = { value: false };
 
   // layout
   const [tabbarHeight, setTabbarHeight] = useState(initTabbarHeight);

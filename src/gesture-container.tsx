@@ -5,13 +5,7 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import {
-  Dimensions,
-  LayoutChangeEvent,
-  Platform,
-  StyleSheet,
-  View,
-} from "react-native";
+import { Dimensions, LayoutChangeEvent, StyleSheet, View } from "react-native";
 
 import {
   Gesture,

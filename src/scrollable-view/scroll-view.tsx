@@ -1,11 +1,18 @@
 import React from "react";
-import { ScrollView as RNScrollView, ScrollViewProps } from "react-native";
+import {
+  Platform,
+  ScrollView as RNScrollView,
+  ScrollViewProps,
+} from "react-native";
 
 import Animated from "react-native-reanimated";
 
 import { SceneComponent } from "../scene";
 
-const AnimatePageView = Animated.createAnimatedComponent(RNScrollView);
+const AnimatePageView =
+  Platform.OS === "web"
+    ? RNScrollView
+    : Animated.createAnimatedComponent(RNScrollView);
 
 export type TabScrollViewProps = ScrollViewProps & {
   index: number;

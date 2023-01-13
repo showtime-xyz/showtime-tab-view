@@ -4,26 +4,23 @@
 
 </div>
 
-A react native component, support collapse header and custom refresh control, power by [Reanimated v2](https://docs.swmansion.com/react-native-reanimated/) & [GestureHandler V2](https://docs.swmansion.com/react-native-gesture-handler/docs/). 
-<video align="right" width="160" alt="This library helped you? Consider sponsoring!" src="https://user-images.githubusercontent.com/37520667/212389901-764422ef-cf1b-48fc-87af-cfbe7ad1f6e2.mp4" /> 
-
-
+A react native component, support collapse header and custom refresh control, power by [Reanimated v2](https://docs.swmansion.com/react-native-reanimated/) & [GestureHandler V2](https://docs.swmansion.com/react-native-gesture-handler/docs/).
+<video align="right" width="160" alt="This library helped you? Consider sponsoring!" src="https://user-images.githubusercontent.com/37520667/212389901-764422ef-cf1b-48fc-87af-cfbe7ad1f6e2.mp4" />
 
 ## What
 
 This is a react native tab view component, it wraps gestures and animations on top of [react-native-tab-view](https://github.com/react-navigation/react-navigation/tree/main/packages/react-native-tab-view#readme), source code in [here](https://github.com/showtime-xyz/showtime-frontend/tree/staging/packages/design-system/collapsible-tab-view) before.
 
-you can see this [context on Twitter](https://twitter.com/alan_toa/status/1564429150152458241). 
-
+you can see this [context on Twitter](https://twitter.com/alan_toa/status/1564429150152458241).
 
 ## Features
 
 - Collapse header.
-- Support [FlashList](https://shopify.github.io/flash-list/).
+- Support [FlashList](https://shopify.github.io/flash-list/). \*(see [this](./example/src/tab-flash-list/index.tsx))
 - Custom fresh control.
 - Support bounces effect on iOS.
 - Support iOS & Android & Web.
-- Zoom header when pull refresh.\*(see this [thread](https://github.com/showtime-xyz/showtime-frontend/discussions/1471))
+- Zoom header when pull refresh. \*(see this [thread](https://github.com/showtime-xyz/showtime-frontend/discussions/1471))
 
 ## Installation
 
@@ -39,11 +36,16 @@ and then
 yarn add showtime-tab-view
 ```
 
+## Example
+
+- [basic example.](./example//src/example.tsx)
+- [zoom effect when pull refresh example.](https://github.com/Daavidaviid/showtime-scrollview-with-zoom-pull-to-refresh)
+- [showtime profile example](https://github.com/showtime-xyz/showtime-frontend/tree/staging/packages/app/components/profile)
+- ...more will come soon!
+
 ## Usage
 
-mostly API is same with [react-native-tab-view](https://github.com/react-navigation/react-navigation/tree/main/packages/react-native-tab-view#readme), I just added some props on top of it.
-
-[basic example](./example//src/example.tsx).
+mostly API is same with [react-native-tab-view](https://github.com/react-navigation/react-navigation/tree/main/packages/react-native-tab-view#readme), I just added some props on top of it, basic:
 
 ```tsx
 import React, { useCallback, useState } from "react";
@@ -128,11 +130,11 @@ export function Example() {
 }
 ```
 
-## API 
+## API
 
-...  
+...
 
-Will come soon! 🔜 
+Will come soon! 🔜
 
 ## Contributing
 
