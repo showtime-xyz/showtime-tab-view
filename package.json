@@ -51,13 +51,14 @@
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
-    "@evilmartians/lefthook": "^1.2.2",
     "@commitlint/config-conventional": "^17.0.2",
+    "@evilmartians/lefthook": "^1.2.2",
     "@react-native-community/eslint-config": "^3.0.2",
     "@release-it/conventional-changelog": "^5.0.0",
     "@types/jest": "^28.1.2",
     "@types/react": "~17.0.21",
     "@types/react-native": "0.70.0",
+    "@types/react-stickynode": "^4.0.0",
     "commitlint": "^17.0.2",
     "del-cli": "^5.0.0",
     "eslint": "^8.4.1",
@@ -73,11 +74,24 @@
     "typescript": "^4.5.2"
   },
   "resolutions": {
-    "@types/react": "17.0.21"
+    "@types/react": "17.0.21",
+    "@types/react-native": "0.70.7"
+  },
+  "dependencies": {
+    "react-stickynode": "^4.1.0",
+    "react-native-gesture-handler": "~2.8.0",
+    "react-native-pager-view": "6.0.1",
+    "react-native-reanimated": "~2.12.0",
+    "react-native-tab-view": "^3.3.4"
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-gesture-handler": ">=2.0.0",
+    "react-native-reanimated": ">=2.0.0",
+    "react-native-tab-view": ">3.3.0",
+    "react-stickynode": ">=4.0.0",
+    "react-native-pager-view": ">=5.0.0"
   },
   "engines": {
     "node": ">= 16.0.0"
@@ -123,12 +137,14 @@
         "error",
         {
           "quoteProps": "consistent",
-          "singleQuote": true,
+          "singleQuote": false,
           "tabWidth": 2,
           "trailingComma": "es5",
           "useTabs": false
         }
-      ]
+      ],
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "warn"
     }
   },
   "eslintIgnore": [
@@ -137,7 +153,7 @@
   ],
   "prettier": {
     "quoteProps": "consistent",
-    "singleQuote": true,
+    "singleQuote": false,
     "tabWidth": 2,
     "trailingComma": "es5",
     "useTabs": false

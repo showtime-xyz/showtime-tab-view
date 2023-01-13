@@ -1,47 +1,3 @@
-<img align="right" width="160" alt="This library helped you? Consider sponsoring!" src="./example/assets/icon.png">
-<div >
-  <h1>Showtime Tab View</h1>
-
-</div>
-
-A react native component, support collapse header and custom refresh control, power by [Reanimated v2](https://docs.swmansion.com/react-native-reanimated/) & [GestureHandler V2](https://docs.swmansion.com/react-native-gesture-handler/docs/).
-
-## What
-
-This is a react native tab view component, it wraps gestures and animations on top of [react-native-tab-view](https://github.com/react-navigation/react-navigation/tree/main/packages/react-native-tab-view#readme), source code in [here](https://github.com/showtime-xyz/showtime-frontend/tree/staging/packages/design-system/collapsible-tab-view) before.
-
-you can see this [context on Twitter](https://twitter.com/alan_toa/status/1564429150152458241).
-
-## Features
-
-- Collapse header.
-- Support [FlashList](https://shopify.github.io/flash-list/).
-- Custom fresh control.
-- Support bounces effect on iOS.
-- Support iOS & Android & Web.
-- Zoom header when pull refresh.\*(see this [thread](https://github.com/showtime-xyz/showtime-frontend/discussions/1471))
-
-## Installation
-
-First things you should follow installation instructions of:
-
-- [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/)
-- [react-native-gesture-handler v2](https://docs.swmansion.com/react-native-gesture-handler/)
-- [react-native-pager-view](https://docs.expo.dev/versions/latest/sdk/view-pager/)
-
-and then
-
-```sh
-yarn add showtime-tab-view
-```
-
-## Usage
-
-mostly API is same with [react-native-tab-view](https://github.com/react-navigation/react-navigation/tree/main/packages/react-native-tab-view#readme), I just added some props on top of it.
-
-[basic example](./example//src/example.tsx).
-
-```tsx
 import React, { useCallback, useState } from "react";
 import { StatusBar, Text, View } from "react-native";
 import { useSharedValue } from "react-native-reanimated";
@@ -122,18 +78,3 @@ export function Example() {
     />
   );
 }
-```
-
-## Contributing
-
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
-
-Special thanks @Daavidaviid to try [zoom header effect when pull to refresh](https://github.com/showtime-xyz/showtime-frontend/discussions/1471).
-
-## License
-
-MIT
-
----
-
-Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
