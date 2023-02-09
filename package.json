@@ -1,7 +1,7 @@
 {
   "name": "showtime-tab-view",
   "version": "0.1.1",
-  "description": "test",
+  "description": "A react native component, support collapse header and custom refresh control, power by Reanimated v2 & GestureHandler V2.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
