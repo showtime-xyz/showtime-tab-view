@@ -8,7 +8,7 @@ const TabScene = ({ route }: any) => {
   return (
     <TabFlashList
       index={route.index}
-      data={new Array(20).fill(0)}
+      data={new Array(100).fill(0)}
       estimatedItemSize={60}
       renderItem={({ index }) => {
         return (
@@ -19,6 +19,8 @@ const TabScene = ({ route }: any) => {
               marginBottom: 8,
               justifyContent: "center",
               alignItems: "center",
+              borderBottomWidth: 1,
+              borderBottomColor: "#eee",
             }}
           >
             <Text>{`${route.title}-Item-${index}`}</Text>
@@ -43,11 +45,11 @@ export function Example() {
   const renderScene = useCallback(({ route }: any) => {
     switch (route.key) {
       case "like":
-        return <TabScene route={route} index={0} />;
+        return <TabScene route={route} index={route.index} />;
       case "owner":
-        return <TabScene route={route} index={1} />;
+        return <TabScene route={route} index={route.index} />;
       case "created":
-        return <TabScene route={route} index={2} />;
+        return <TabScene route={route} index={route.index} />;
       default:
         return null;
     }
