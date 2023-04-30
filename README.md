@@ -13,11 +13,11 @@ This is a React Native tab view component that wraps gestures and animations on 
 ## Features
 
 - Collapsible header.
-- Support for [FlashList](https://shopify.github.io/flash-list/). *(see [this](./example/src/tab-flash-list/index.tsx))
+- Support for [FlashList](https://shopify.github.io/flash-list/). \*(see [this](./example/src/tab-flash-list/index.tsx))
 - Custom refresh control.
 - Bounce effect support on iOS.
 - Support for iOS, Android, and Web.
-- Zoom header when pulling to refresh. *(see this [thread](https://github.com/showtime-xyz/showtime-frontend/discussions/1471))
+- Zoom header when pulling to refresh. \*(see this [thread](https://github.com/showtime-xyz/showtime-frontend/discussions/1471))
 
 ## Installation
 
@@ -31,11 +31,10 @@ FlashList is not a required dependency, but for optimal performance, it is recom
 
 - [FlashList by Shopify](https://shopify.github.io/flash-list/docs/)
 
-
 And then, you can install the package using the following command:
 
 ```sh
-yarn add showtime-tab-view
+yarn add @showtime-xyz/tab-view
 ```
 
 ## Examples
@@ -53,7 +52,7 @@ The API for this package is similar to [react-native-tab-view](https://github.co
 import React, { useCallback, useState } from "react";
 import { StatusBar, Text, View } from "react-native";
 import { useSharedValue } from "react-native-reanimated";
-import { Route, TabView } from "showtime-tab-view";
+import { Route, TabView } from "@showtime-xyz/tab-view";
 import { TabFlashList } from "./tab-flash-list";
 const StatusBarHeight = StatusBar.currentHeight ?? 0;
 const TabScene = ({ route }: any) => {
@@ -136,11 +135,9 @@ export function Example() {
 
 ... API documentation will be available soon. 🔜
 
-
 ## Contributing
 
 To learn how to contribute to this repository and understand the development workflow, please refer to the [contributing guide](CONTRIBUTING.md).
-
 
 ## Shoutout
 

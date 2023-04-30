@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { StatusBar, Text, View } from "react-native";
 import { useSharedValue } from "react-native-reanimated";
-import { Route, TabView } from "showtime-tab-view";
+import { Route, TabView } from "@showtime-xyz/tab-view";
 import { TabFlashList } from "./tab-flash-list";
 const StatusBarHeight = StatusBar.currentHeight ?? 0;
 const TabScene = ({ route }: any) => {
