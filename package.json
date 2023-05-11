@@ -58,7 +58,6 @@
     "@types/jest": "^28.1.2",
     "@types/react": "~17.0.21",
     "@types/react-native": "0.70.0",
-    "@types/react-stickynode": "^4.0.0",
     "commitlint": "^17.0.2",
     "del-cli": "^5.0.0",
     "eslint": "^8.4.1",
@@ -78,7 +77,6 @@
     "@types/react-native": "0.70.7"
   },
   "dependencies": {
-    "react-stickynode": "^4.1.0",
     "react-native-gesture-handler": "~2.8.0",
     "react-native-pager-view": "6.0.1",
     "react-native-reanimated": "~2.12.0",
@@ -90,7 +88,6 @@
     "react-native-gesture-handler": ">=2.0.0",
     "react-native-reanimated": ">=2.0.0",
     "react-native-tab-view": ">3.3.0",
-    "react-stickynode": ">=4.0.0",
     "react-native-pager-view": ">=5.0.0"
   },
   "engines": {

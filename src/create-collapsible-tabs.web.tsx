@@ -13,7 +13,6 @@ import {
   TabView,
   TabViewProps,
 } from "react-native-tab-view";
-import Sticky from "react-stickynode";
 
 import { HeaderTabContext } from "./context";
 import { useSceneInfo } from "./hooks";
@@ -112,9 +111,7 @@ function CollapsibleHeaderTabView<T extends Route>(
   const renderTabBarContainer = (children: React.ReactElement) => {
     return (
       <View style={styles.tabbarStyle}>
-        <Sticky enabled={true} top={minHeaderHeight}>
-          <View onLayout={tabbarOnLayout}>{children}</View>
-        </Sticky>
+        <View onLayout={tabbarOnLayout}>{children}</View>
       </View>
     );
   };
