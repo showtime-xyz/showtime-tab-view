@@ -1,0 +1,17 @@
+diff --git a/node_modules/react-native-reanimated/src/reanimated2/mappers.ts b/node_modules/react-native-reanimated/src/reanimated2/mappers.ts
+index 4e66106..bc8712f 100644
+--- a/node_modules/react-native-reanimated/src/reanimated2/mappers.ts
++++ b/node_modules/react-native-reanimated/src/reanimated2/mappers.ts
+@@ -80,8 +80,11 @@ export function createMapperRegistry() {
+   }
+ 
+   function mapperRun() {
+-    processingMappers = true;
+     runRequested = false;
++    if (processingMappers) {
++      return;
++    }
++    processingMappers = true;
+     if (mappers.size !== sortedMappers.length) {
+       updateMappersOrder();
+     }
