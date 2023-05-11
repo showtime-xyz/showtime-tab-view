@@ -22,17 +22,21 @@ module.exports = {
   // So we block them at the root, and alias them to the versions in example's node_modules
   resolver: {
     ...defaultConfig.resolver,
-
+    nodeModulesPaths: [
+      path.resolve(__dirname, "node_modules"),
+      path.resolve(root, "node_modules"),
+    ],
     blacklistRE: exclusionList(
       modules.map(
         (m) =>
           new RegExp(`^${escape(path.join(root, "node_modules", m))}\\/.*$`)
       )
     ),
-
     extraNodeModules: modules.reduce((acc, name) => {
       acc[name] = path.join(__dirname, "node_modules", name);
       return acc;
     }, {}),
+    sourceExts: ["ts", "tsx", "js", "jsx", "json", "cjs"],
+    assetExts: ["glb", "gltf", "png", "jpg", "svg"],
   },
 };
