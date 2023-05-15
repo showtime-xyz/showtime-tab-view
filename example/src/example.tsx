@@ -75,6 +75,7 @@ export function Example() {
       minHeaderHeight={44 + StatusBarHeight}
       animationHeaderPosition={animationHeaderPosition}
       animationHeaderHeight={animationHeaderHeight}
+      enableGestureRunOnJS={false}
     />
   );
 }

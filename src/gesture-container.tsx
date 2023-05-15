@@ -70,6 +70,7 @@ export const GestureContainer = React.forwardRef<
     emptyBodyComponent,
     navigationState,
     renderSceneHeader: renderSceneHeaderProp,
+    enableGestureRunOnJS = false,
   },
   forwardedRef
 ) {
@@ -293,7 +294,8 @@ export const GestureContainer = React.forwardRef<
           isSlidingHeader.value = false;
         }
       );
-    });
+    })
+    .runOnJS(enableGestureRunOnJS);
 
   const gestureHandler = Gesture.Pan()
     .simultaneousWithExternalGesture(gestureHandlerHeader, ...childGestures)
@@ -377,7 +379,9 @@ export const GestureContainer = React.forwardRef<
       } else {
         tabsRefreshTrans.value < 0 ? onTabsStartRefresh() : onTabsEndRefresh();
       }
-    });
+    })
+    .runOnJS(enableGestureRunOnJS);
+
   //#endregion
 
   useEffect(() => {
