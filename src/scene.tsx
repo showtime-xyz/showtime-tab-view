@@ -23,6 +23,7 @@ export function SceneComponent<P extends object>({
   scrollIndicatorInsets,
   forwardedRef,
   useExternalScrollView = false,
+  bounces = true,
   ...restProps
 }: SceneProps<P>) {
   //#region refs
@@ -113,7 +114,7 @@ export function SceneComponent<P extends object>({
             top: headerHeight,
             ...scrollIndicatorInsets,
           }}
-          // bounces={false}
+          bounces={bounces}
         />
       </GestureDetector>
     </Animated.View>
