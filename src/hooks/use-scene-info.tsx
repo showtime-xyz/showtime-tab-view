@@ -10,7 +10,9 @@ import Animated, {
 import type { UpdateSceneInfoParams } from "../types";
 
 export const useSceneInfo = (curIndexValue: Animated.SharedValue<number>) => {
+  // Are all the fields on the scene ready
   const sceneIsReady = useSharedValue<{ [index: number]: boolean }>({});
+
   const [childScrollYTrans, setChildScrollYTrans] = useState<{
     [index: number]: Animated.SharedValue<number>;
   }>({});
