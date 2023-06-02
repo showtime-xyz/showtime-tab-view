@@ -8,11 +8,13 @@ import Animated, {
   useSharedValue,
   withTiming,
   runOnJS,
+  scrollTo,
 } from "react-native-reanimated";
 
 import { useHeaderTabContext } from "./context";
 import { useSharedScrollableRef, useSyncInitialPosition } from "./hooks";
 import type { SceneProps } from "./types";
+import { SCROLLABLE_STATE } from "./constants";
 
 export function SceneComponent<P extends object>({
   index,
@@ -40,6 +42,8 @@ export function SceneComponent<P extends object>({
     refHasChanged,
     updateSceneInfo,
     scrollViewPaddingTop,
+    animatedScrollableState,
+    disableBounces,
   } = useHeaderTabContext();
   //#endregion
 
@@ -58,13 +62,30 @@ export function SceneComponent<P extends object>({
   //#region methods
   const onScrollAnimateEvent = useAnimatedScrollHandler({
     onScroll: (e) => {
-      const moveY = e.contentOffset.y;
-      scrollY.value = moveY;
+      scrollY.value = e.contentOffset.y;
       if (curIndexValue.value !== index) return;
-      shareAnimatedValue.value = moveY;
+      if (animatedScrollableState.value === SCROLLABLE_STATE.LOCKED) {
+        scrollTo(scollViewRef, 0, 0, false);
+      } else {
+        if (curIndexValue.value !== index) return;
+        shareAnimatedValue.value = e.contentOffset.y;
+      }
       if (propOnScroll) {
         runOnJS(propOnScroll as any)({ nativeEvent: e });
       }
+    },
+    onBeginDrag: (e) => {
+      disableBounces.value = true;
+      console.log("onBeginDrag");
+    },
+    onEndDrag: (e) => {
+      console.log("onEndDrag");
+    },
+    onMomentumEnd: () => {
+      console.log("onMomentumEnd");
+    },
+    onMomentumBegin: () => {
+      console.log("onMomentumBegin");
     },
   });
   // adjust the scene size

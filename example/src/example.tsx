@@ -58,7 +58,7 @@ export function Example() {
     setTimeout(() => {
       console.log("onStartRefresh");
       setIsRefreshing(false);
-    }, 300);
+    }, 2000);
   };
   const renderHeader = () => (
     <View style={{ height: 300, backgroundColor: "#000" }}></View>

@@ -8,6 +8,7 @@ import type {
   TabViewProps,
   Route as TabViewRoute,
 } from "react-native-tab-view";
+import type { SCROLLABLE_STATE } from "./constants";
 
 export type Route = TabViewRoute & {
   index: number;
@@ -116,4 +117,6 @@ export type TabHeaderContext = {
   curIndexValue: Animated.SharedValue<number>;
   updateSceneInfo: (e: UpdateSceneInfoParams) => void;
   scrollViewPaddingTop: number;
+  animatedScrollableState: Animated.SharedValue<SCROLLABLE_STATE>;
+  disableBounces?: Animated.SharedValue<boolean>;
 } | null;
