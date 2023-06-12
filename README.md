@@ -52,8 +52,8 @@ The API for this package is similar to [react-native-tab-view](https://github.co
 import React, { useCallback, useState } from "react";
 import { StatusBar, Text, View } from "react-native";
 import { useSharedValue } from "react-native-reanimated";
-import { Route, TabView } from "@showtime-xyz/tab-view";
-import { TabFlashList } from "./tab-flash-list";
+import { Route, TabView, TabFlashList } from "@showtime-xyz/tab-view";
+
 const StatusBarHeight = StatusBar.currentHeight ?? 0;
 const TabScene = ({ route }: any) => {
   return (
