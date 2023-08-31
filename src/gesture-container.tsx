@@ -18,7 +18,6 @@ import Animated, {
   interpolate,
   runOnJS,
   runOnUI,
-  scrollTo,
   useAnimatedReaction,
   useAnimatedStyle,
   useDerivedValue,
@@ -136,6 +135,7 @@ export const GestureContainer = React.forwardRef<
     }
     return SCROLLABLE_STATE.UNLOCKED;
   });
+
   //#region methods
   const animateTabsToRefresh = useCallback(
     (isToRefresh: boolean) => {
@@ -324,9 +324,7 @@ export const GestureContainer = React.forwardRef<
     .enabled(scrollEnabled)
     .activeOffsetX([-width, width])
     .activeOffsetY([-10, 10])
-    .onBegin((e) => {
-      // console.log();
-
+    .onBegin(() => {
       runOnUI(stopAllAnimation)();
     })
     .onStart((e) => {

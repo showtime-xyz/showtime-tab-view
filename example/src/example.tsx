@@ -8,7 +8,7 @@ const TabScene = ({ route }: any) => {
   return (
     <TabFlashList
       index={route.index}
-      data={new Array(20).fill(0)}
+      data={new Array(100).fill(0)}
       estimatedItemSize={60}
       renderItem={({ index }) => {
         return (
