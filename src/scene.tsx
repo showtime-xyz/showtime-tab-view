@@ -63,11 +63,10 @@ export function SceneComponent<P extends object>({
   const onScrollAnimateEvent = useAnimatedScrollHandler({
     onScroll: (e) => {
       scrollY.value = e.contentOffset.y;
-      if (curIndexValue.value !== index) return;
+
       if (animatedScrollableState.value === SCROLLABLE_STATE.LOCKED) {
         scrollTo(scollViewRef, 0, 0, false);
       } else {
-        if (curIndexValue.value !== index) return;
         shareAnimatedValue.value = e.contentOffset.y;
       }
       if (propOnScroll) {
@@ -75,7 +74,9 @@ export function SceneComponent<P extends object>({
       }
     },
     onBeginDrag: (e) => {
-      disableBounces.value = true;
+      if (disableBounces) {
+        disableBounces.value = true;
+      }
       console.log("onBeginDrag");
     },
     onEndDrag: (e) => {
@@ -134,7 +135,7 @@ export function SceneComponent<P extends object>({
             top: headerHeight,
             ...scrollIndicatorInsets,
           }}
-          // bounces={false}
+          bounces={false}
         />
       </GestureDetector>
     </Animated.View>

@@ -1,11 +1,18 @@
 import React, {
+  ComponentProps,
   useCallback,
   useEffect,
   useImperativeHandle,
   useMemo,
   useState,
 } from "react";
-import { Dimensions, LayoutChangeEvent, StyleSheet, View } from "react-native";
+import {
+  Dimensions,
+  LayoutChangeEvent,
+  StyleSheet,
+  View,
+  ViewProps,
+} from "react-native";
 
 import {
   Gesture,
@@ -253,24 +260,6 @@ export const GestureContainer = React.forwardRef<
     ]
   );
 
-  const tabbarOnLayout = useCallback(
-    ({
-      nativeEvent: {
-        layout: { height },
-      },
-    }: LayoutChangeEvent) => {
-      if (overflowHeight > height) {
-        console.warn("overflowHeight preferably less than the tabbar height");
-      }
-      if (Math.abs(tabbarHeight - height) < 1) return;
-      setTabbarHeight(height);
-    },
-    [tabbarHeight, overflowHeight]
-  );
-
-  const containerOnLayout = useCallback((event: LayoutChangeEvent) => {
-    setTabviewHeight(event.nativeEvent.layout.height);
-  }, []);
   //#endregion
 
   //#region gesture handler
@@ -325,7 +314,7 @@ export const GestureContainer = React.forwardRef<
     .activeOffsetX([-width, width])
     .activeOffsetY([-10, 10])
     .onBegin(() => {
-      runOnUI(stopAllAnimation)();
+      stopAllAnimation();
     })
     .onStart((e) => {
       isPullEnough.value = false;
@@ -613,7 +602,19 @@ export const GestureContainer = React.forwardRef<
             ) : (
               <Animated.View
                 style={{ transform: [{ translateY: -overflowHeight }] }}
-                onLayout={tabbarOnLayout}
+                onLayout={({
+                  nativeEvent: {
+                    layout: { height },
+                  },
+                }) => {
+                  if (overflowHeight > height) {
+                    console.warn(
+                      "overflowHeight preferably less than the tabbar height"
+                    );
+                  }
+                  if (Math.abs(tabbarHeight - height) < 1) return;
+                  setTabbarHeight(height);
+                }}
               >
                 {children}
               </Animated.View>
@@ -692,7 +693,9 @@ export const GestureContainer = React.forwardRef<
         <Animated.View style={[styles.container, opacityStyle]}>
           <Animated.View
             style={[styles.container, animateStyle]}
-            onLayout={containerOnLayout}
+            onLayout={(event) => {
+              setTabviewHeight(event.nativeEvent.layout.height);
+            }}
           >
             {renderTabView({
               renderTabBarContainer: renderTabBarContainer,
