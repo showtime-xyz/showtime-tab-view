@@ -8,11 +8,13 @@ import Animated, {
   useSharedValue,
   withTiming,
   runOnJS,
+  scrollTo,
 } from "react-native-reanimated";
 
 import { useHeaderTabContext } from "./context";
 import { useSharedScrollableRef, useSyncInitialPosition } from "./hooks";
 import type { SceneProps } from "./types";
+import { SCROLLABLE_STATE } from "./constants";
 
 export function SceneComponent<P extends object>({
   index,
@@ -36,10 +38,11 @@ export function SceneComponent<P extends object>({
     shareAnimatedValue,
     headerHeight,
     expectHeight,
-    curIndexValue,
     refHasChanged,
     updateSceneInfo,
     scrollViewPaddingTop,
+    animatedScrollableState,
+    disableBounces,
   } = useHeaderTabContext();
   //#endregion
 
@@ -58,14 +61,32 @@ export function SceneComponent<P extends object>({
   //#region methods
   const onScrollAnimateEvent = useAnimatedScrollHandler({
     onScroll: (e) => {
-      const moveY = e.contentOffset.y;
-      scrollY.value = moveY;
-      if (curIndexValue.value !== index) return;
-      shareAnimatedValue.value = moveY;
+      scrollY.value = e.contentOffset.y;
+
+      if (animatedScrollableState.value === SCROLLABLE_STATE.LOCKED) {
+        scrollTo(scollViewRef, 0, 0, false);
+      } else {
+        shareAnimatedValue.value = e.contentOffset.y;
+      }
       if (propOnScroll) {
         runOnJS(propOnScroll as any)({ nativeEvent: e });
       }
     },
+    onBeginDrag: () => {
+      if (disableBounces) {
+        disableBounces.value = true;
+      }
+      // console.log("onBeginDrag");
+    },
+    // onEndDrag: (e) => {
+    //   console.log("onEndDrag");
+    // },
+    // onMomentumEnd: () => {
+    //   console.log("onMomentumEnd");
+    // },
+    // onMomentumBegin: () => {
+    //   console.log("onMomentumBegin");
+    // },
   });
   // adjust the scene size
   const _onContentSizeChange = useCallback(
@@ -113,7 +134,7 @@ export function SceneComponent<P extends object>({
             top: headerHeight,
             ...scrollIndicatorInsets,
           }}
-          // bounces={false}
+          bounces={false}
         />
       </GestureDetector>
     </Animated.View>

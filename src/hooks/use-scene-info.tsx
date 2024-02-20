@@ -1,20 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useEffect, useState } from "react";
 
-import Animated, {
+import {
   runOnJS,
   useAnimatedReaction,
   useSharedValue,
+  SharedValue,
 } from "react-native-reanimated";
 
 import type { UpdateSceneInfoParams } from "../types";
 
-export const useSceneInfo = (curIndexValue: Animated.SharedValue<number>) => {
-  // Are all the fields on the scene ready
+export const useSceneInfo = (curIndexValue: SharedValue<number>) => {
   const sceneIsReady = useSharedValue<{ [index: number]: boolean }>({});
-
   const [childScrollYTrans, setChildScrollYTrans] = useState<{
-    [index: number]: Animated.SharedValue<number>;
+    [index: number]: SharedValue<number>;
   }>({});
   const [childScrollRef, setChildScrollRef] = useState<{
     [index: number]: any;

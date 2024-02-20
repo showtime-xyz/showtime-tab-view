@@ -6,6 +6,7 @@ import Animated, {
   useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
+  SharedValue,
 } from "react-native-reanimated";
 
 import { useRefreshDerivedValue } from "./hooks";
@@ -15,10 +16,10 @@ type RefreshControlContainerProps = {
   top: number;
   refreshHeight: number;
   overflowPull: number;
-  opacityValue: Animated.SharedValue<number>;
-  refreshValue: Animated.SharedValue<number>;
-  isRefreshing: Animated.SharedValue<boolean>;
-  isRefreshingWithAnimation: Animated.SharedValue<boolean>;
+  opacityValue: SharedValue<number>;
+  refreshValue: SharedValue<number>;
+  isRefreshing: SharedValue<boolean>;
+  isRefreshingWithAnimation: SharedValue<boolean>;
   pullExtendedCoefficient: number;
   renderContent?: (refreshProps: RefreshControlProps) => React.ReactElement;
   refreshControlColor?: string;
