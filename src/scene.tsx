@@ -38,7 +38,6 @@ export function SceneComponent<P extends object>({
     shareAnimatedValue,
     headerHeight,
     expectHeight,
-    curIndexValue,
     refHasChanged,
     updateSceneInfo,
     scrollViewPaddingTop,
@@ -73,21 +72,21 @@ export function SceneComponent<P extends object>({
         runOnJS(propOnScroll as any)({ nativeEvent: e });
       }
     },
-    onBeginDrag: (e) => {
+    onBeginDrag: () => {
       if (disableBounces) {
         disableBounces.value = true;
       }
-      console.log("onBeginDrag");
+      // console.log("onBeginDrag");
     },
-    onEndDrag: (e) => {
-      console.log("onEndDrag");
-    },
-    onMomentumEnd: () => {
-      console.log("onMomentumEnd");
-    },
-    onMomentumBegin: () => {
-      console.log("onMomentumBegin");
-    },
+    // onEndDrag: (e) => {
+    //   console.log("onEndDrag");
+    // },
+    // onMomentumEnd: () => {
+    //   console.log("onMomentumEnd");
+    // },
+    // onMomentumBegin: () => {
+    //   console.log("onMomentumBegin");
+    // },
   });
   // adjust the scene size
   const _onContentSizeChange = useCallback(

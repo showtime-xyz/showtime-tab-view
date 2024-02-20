@@ -1,18 +1,11 @@
 import React, {
-  ComponentProps,
   useCallback,
   useEffect,
   useImperativeHandle,
   useMemo,
   useState,
 } from "react";
-import {
-  Dimensions,
-  LayoutChangeEvent,
-  StyleSheet,
-  View,
-  ViewProps,
-} from "react-native";
+import { Dimensions, LayoutChangeEvent, StyleSheet, View } from "react-native";
 
 import {
   Gesture,
@@ -24,7 +17,6 @@ import Animated, {
   Extrapolation,
   interpolate,
   runOnJS,
-  runOnUI,
   useAnimatedReaction,
   useAnimatedStyle,
   useDerivedValue,

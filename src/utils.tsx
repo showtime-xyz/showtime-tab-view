@@ -1,9 +1,10 @@
 import { Platform } from "react-native";
 
-import Animated, {
+import {
   runOnJS,
   scrollTo,
   withTiming,
+  SharedValue,
 } from "react-native-reanimated";
 
 export function _ScrollTo(ref: any, x: number, y: number, animated: boolean) {
@@ -22,9 +23,9 @@ export const animateToRefresh = ({
   destPoi,
   onStartRefresh,
 }: {
-  transRefreshing: Animated.SharedValue<number>;
-  isRefreshing: Animated.SharedValue<boolean>;
-  isRefreshingWithAnimation: Animated.SharedValue<boolean>;
+  transRefreshing: SharedValue<number>;
+  isRefreshing: SharedValue<boolean>;
+  isRefreshingWithAnimation: SharedValue<boolean>;
   isToRefresh: boolean;
   destPoi: number;
   onStartRefresh?: () => void;
