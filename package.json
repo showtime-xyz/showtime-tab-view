@@ -1,6 +1,6 @@
 {
   "name": "@showtime-xyz/tab-view",
-  "version": "0.1.7",
+  "version": "0.2.0",
   "description": "A react native component, support collapse header and custom refresh control, power by Reanimated v2 & GestureHandler V2.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
