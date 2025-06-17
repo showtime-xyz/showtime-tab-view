@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useMemo } from "react";
+import React, { memo } from "react";
 import { ActivityIndicator, StyleSheet } from "react-native";
 
 import Animated, {
@@ -6,12 +6,11 @@ import Animated, {
   useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
-  withSpring,
-  type SharedValue,
+  SharedValue,
 } from "react-native-reanimated";
 
-import { useRefreshDerivedValue } from "./hooks/use-refresh-value";
-import { RefreshTypeEnum, type RefreshControlProps } from "./types";
+import { useRefreshDerivedValue } from "./hooks";
+import { RefreshControlProps, RefreshTypeEnum } from "./types";
 
 type RefreshControlContainerProps = {
   top: number;
@@ -26,111 +25,110 @@ type RefreshControlContainerProps = {
   refreshControlColor?: string;
 };
 
-const RefreshControlContainer = memo<RefreshControlContainerProps>(
-  ({
-    top,
+const RefreshControlContainer: React.FC<RefreshControlContainerProps> = ({
+  top,
+  refreshHeight,
+  overflowPull,
+  opacityValue,
+  refreshValue,
+  isRefreshing,
+  isRefreshingWithAnimation,
+  pullExtendedCoefficient,
+  renderContent,
+  refreshControlColor = "#999999",
+}) => {
+  const refreshType = useSharedValue<RefreshTypeEnum>(RefreshTypeEnum.Idle);
+  const progress = useDerivedValue(() => {
+    if (isRefreshingWithAnimation.value) return 1;
+    return Math.min(refreshValue.value / refreshHeight, 1);
+  });
+  const tranYValue = useSharedValue(0);
+
+  useRefreshDerivedValue(tranYValue, {
+    animatedValue: refreshValue,
     refreshHeight,
     overflowPull,
-    opacityValue,
-    refreshValue,
-    isRefreshing,
-    isRefreshingWithAnimation,
     pullExtendedCoefficient,
-    renderContent,
-    refreshControlColor = "#999999",
-  }) => {
-    const refreshType = useSharedValue<RefreshTypeEnum>(RefreshTypeEnum.Idle);
+  });
 
-    const progress = useDerivedValue(() => {
-      "worklet";
-      if (isRefreshingWithAnimation.value) return 1;
-      return Math.min(refreshValue.value / refreshHeight, 1);
-    }, [refreshHeight]);
-
-    const tranYValue = useSharedValue(0);
-
-    useRefreshDerivedValue(tranYValue, {
-      animatedValue: refreshValue,
-      refreshHeight,
-      overflowPull,
-      pullExtendedCoefficient,
-    });
-
-    useAnimatedReaction(
-      () => {
-        "worklet";
-        return {
-          _progress: progress.value,
-          _isRefreshing: isRefreshing.value,
-          _isRefreshingWithAnimation: isRefreshingWithAnimation.value,
-        };
-      },
-      ({ _progress, _isRefreshing, _isRefreshingWithAnimation }) => {
-        "worklet";
-        if (_isRefreshing !== _isRefreshingWithAnimation) {
-          refreshType.value = _isRefreshing
-            ? RefreshTypeEnum.Pending
-            : RefreshTypeEnum.Finish;
-          return;
-        }
-        if (_isRefreshing) {
-          refreshType.value = RefreshTypeEnum.Refreshing;
-        } else {
-          refreshType.value =
-            _progress < 1 ? RefreshTypeEnum.Cancel : RefreshTypeEnum.Success;
-        }
-      },
-      [refreshHeight]
-    );
-
-    const animatedStyle = useAnimatedStyle(() => {
-      "worklet";
+  useAnimatedReaction(
+    () => {
       return {
-        opacity: withSpring(opacityValue.value, {
-          mass: 1,
-          damping: 15,
-          stiffness: 120,
-        }),
-        transform: [
-          {
-            translateY: tranYValue.value,
-          },
-        ],
+        _progress: progress.value,
+        _isRefreshing: isRefreshing.value,
+        _isRefreshingWithAnimation: isRefreshingWithAnimation.value,
       };
-    }, []);
-
-    const childProps = useMemo(
-      () => ({
-        refreshValue,
-        refreshType,
-        progress,
-      }),
-      [refreshValue, refreshType, progress]
-    );
-
-    const _renderContent = useCallback(() => {
-      if (renderContent) {
-        return React.cloneElement(renderContent(childProps), childProps);
+    },
+    ({ _progress, _isRefreshing, _isRefreshingWithAnimation }) => {
+      if (_isRefreshing !== _isRefreshingWithAnimation) {
+        refreshType.value = _isRefreshing
+          ? RefreshTypeEnum.Pending
+          : RefreshTypeEnum.Finish;
+        return;
       }
-      return (
-        <RefreshControlNormal
-          {...childProps}
-          refreshControlColor={refreshControlColor}
-        />
-      );
-    }, [renderContent, childProps, refreshControlColor]);
+      if (_isRefreshing) {
+        refreshType.value = RefreshTypeEnum.Refreshing;
+      } else {
+        refreshType.value =
+          _progress < 1 ? RefreshTypeEnum.Cancel : RefreshTypeEnum.Success;
+      }
+    },
+    [refreshHeight]
+  );
 
-    const containerStyle = useMemo(
-      () => [
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      opacity: opacityValue.value,
+      transform: [
+        {
+          translateY: tranYValue.value,
+        },
+      ],
+    };
+  });
+
+  const _renderContent = () => {
+    const _props = makeChildProps();
+    if (renderContent) {
+      return React.cloneElement(renderContent(_props), makeChildProps());
+    }
+    return (
+      <RefreshControlNormal
+        {..._props}
+        refreshControlColor={refreshControlColor}
+      />
+    );
+  };
+
+  const makeChildProps = () => {
+    return {
+      refreshValue,
+      refreshType,
+      progress,
+    };
+  };
+
+  return (
+    <Animated.View
+      style={[
         styles.container,
         { top: top - refreshHeight, height: refreshHeight },
         animatedStyle,
-      ],
-      [top, refreshHeight, animatedStyle]
-    );
+      ]}
+    >
+      {_renderContent()}
+    </Animated.View>
+  );
+};
 
+export default RefreshControlContainer;
+
+const RefreshControlNormal = memo<RefreshControlProps>(
+  function RefreshControlNormal({ refreshControlColor }) {
     return (
-      <Animated.View style={containerStyle}>{_renderContent()}</Animated.View>
+      <Animated.View style={styles.baseControl}>
+        <ActivityIndicator color={refreshControlColor} />
+      </Animated.View>
     );
   }
 );
@@ -154,15 +152,3 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
-
-const RefreshControlNormal = memo<
-  RefreshControlProps & { refreshControlColor?: string }
->(function RefreshControlNormal({ refreshControlColor }) {
-  return (
-    <Animated.View style={styles.baseControl}>
-      <ActivityIndicator color={refreshControlColor} />
-    </Animated.View>
-  );
-});
-
-export default RefreshControlContainer;

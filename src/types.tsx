@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type React from "react";
 import type { ComponentClass } from "react";
 import type { ScrollViewProps } from "react-native";
@@ -9,20 +8,20 @@ import type {
   TabViewProps,
   Route as TabViewRoute,
 } from "react-native-tab-view";
+import type { SCROLLABLE_STATE } from "./constants";
 
 export type Route = TabViewRoute & {
-  key?: string;
   index: number;
   subtitle?: string | number;
 };
 
 export enum RefreshTypeEnum {
-  Idle = 0,
-  Pending = 1,
-  Success = 2,
-  Refreshing = 3,
-  Finish = 4,
-  Cancel = 5,
+  Idle,
+  Pending,
+  Success,
+  Refreshing,
+  Finish,
+  Cancel,
 }
 
 export type CollapsibleHeaderProps<T extends Route> = {
@@ -58,9 +57,7 @@ export type CollapsibleHeaderProps<T extends Route> = {
 };
 
 export type TabViewCustomRenders = {
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   renderTabBarContainer: (children: any) => JSX.Element;
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   renderSceneHeader: (children: any, props: any) => JSX.Element;
 };
 
@@ -80,16 +77,13 @@ export interface RefreshControlProps {
   refreshControlColor?: string;
 }
 export type SceneProps<P extends object> = P & {
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   ContainerView: any;
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   forwardedRef: any;
   index: number;
   useExternalScrollView?: boolean;
 } & ScrollViewProps;
 
 export type UpdateSceneInfoParams = {
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   scrollRef: any;
   index: number;
   scrollY: SharedValue<number>;
@@ -123,4 +117,6 @@ export type TabHeaderContext = {
   curIndexValue: SharedValue<number>;
   updateSceneInfo: (e: UpdateSceneInfoParams) => void;
   scrollViewPaddingTop: number;
+  animatedScrollableState: SharedValue<SCROLLABLE_STATE>;
+  disableBounces?: SharedValue<boolean>;
 } | null;

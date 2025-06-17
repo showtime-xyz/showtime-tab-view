@@ -2,29 +2,25 @@ import React, {
   useCallback,
   useEffect,
   useImperativeHandle,
+  useMemo,
   useRef,
 } from "react";
 
 import {
-  type NavigationState,
-  type SceneRendererProps,
+  NavigationState,
+  SceneRendererProps,
   TabBar,
-  type TabDescriptor,
-  type TabView,
-  type TabViewProps,
+  TabView,
+  TabViewProps,
 } from "react-native-tab-view";
 
-import {
-  GestureContainer,
-  type GestureContainerRef,
-} from "./gesture-container";
+import { GestureContainer, GestureContainerRef } from "./gesture-container";
 import type {
   CollapsibleHeaderProps,
   Route,
   TabViewCustomRenders,
 } from "./types";
 
-export type CollapsibleTabViewRef = object;
 export type CollapsibleTabViewProps<T extends Route> = Partial<
   TabViewProps<T>
 > &
@@ -36,6 +32,14 @@ export type ForwardTabViewProps<T extends Route> =
     forwardedRef: React.ForwardedRef<CollapsibleTabViewRef>;
     Component: React.PropsWithRef<typeof TabView>;
   };
+
+export type CollapsibleTabViewRef = {
+  setCurrentIndex: (index: number) => void;
+  scrollCurrentTabTo: (offsetY: number, animated?: boolean) => void;
+  isSceneReady: () => boolean;
+  getCurrentScrollRef: () => any;
+  scrollCurrentTabToTop: (index: number, animated?: boolean) => void;
+};
 
 export function createCollapsibleTabsComponent<T extends Route>(
   Component: React.PropsWithRef<typeof TabView>
@@ -64,18 +68,29 @@ function CollapsibleHeaderTabView<T extends Route>({
     gestureContainerRef.current?.setCurrentIndex(props.navigationState.index);
   }, [props.navigationState.index]);
 
-  useImperativeHandle(
-    forwardedRef,
-    () => ({
-      // Todo: add snapTo tab view content method
-    }),
-    []
-  );
+  useImperativeHandle(forwardedRef, () => {
+    const innerRef = gestureContainerRef.current;
+    if (!innerRef) {
+      return {
+        setCurrentIndex: () => {},
+        scrollCurrentTabTo: () => {},
+        isSceneReady: () => false,
+        getCurrentScrollRef: () => null,
+        scrollCurrentTabToTop: () => {},
+      };
+    }
+    return {
+      scrollCurrentTabToTop: innerRef.scrollCurrentTabToTop,
+      setCurrentIndex: innerRef.setCurrentIndex,
+      scrollCurrentTabTo: innerRef.scrollCurrentTabTo,
+      isSceneReady: innerRef.isSceneReady,
+      getCurrentScrollRef: innerRef.getCurrentScrollRef,
+    };
+  }, [gestureContainerRef.current]);
   const renderTabBar = useCallback(
     (
       tabbarProps: SceneRendererProps & {
         navigationState: NavigationState<T>;
-        options: Record<string, TabDescriptor<T>> | undefined;
       }
     ) => {
       return props?.renderTabBar ? (
@@ -88,24 +103,30 @@ function CollapsibleHeaderTabView<T extends Route>({
   );
 
   const renderTabView = (e: TabViewCustomRenders) => {
-    const { Component, renderScene, ...restProps } = props;
+    const { Component, renderScene, navigationState, ...restProps } = props;
+    const routesKey = useMemo(() => {
+      return navigationState.routes.map((r) => r.key).join("_");
+    }, [navigationState.routes]);
 
     return (
       <Component
         {...restProps}
+        key={routesKey}
+        navigationState={navigationState}
         renderTabBar={(
           tabbarProps: SceneRendererProps & {
             navigationState: NavigationState<T>;
-            options: Record<string, TabDescriptor<T>> | undefined;
           }
         ) => e.renderTabBarContainer(renderTabBar(tabbarProps))}
-        renderScene={(props) => e.renderSceneHeader(renderScene(props), props)}
+        renderScene={(props: any) =>
+          e.renderSceneHeader(renderScene(props), props)
+        }
       />
     );
   };
 
   return (
-    // @ts-expect-error Needs fixing
+    //@ts-ignore
     <GestureContainer
       ref={gestureContainerRef}
       initialPage={initialPageRef.current}

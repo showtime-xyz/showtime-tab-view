@@ -1,25 +1,28 @@
-import React, {
-  type ComponentClass,
-  type ForwardRefExoticComponent,
-  type RefAttributes,
-} from 'react'
-import Animated from 'react-native-reanimated'
-import { SceneComponent } from './scene'
+import type { ComponentClass } from "react";
+import React from "react";
 
-export function createCollapsibleScrollView<P extends object>(Component: ComponentClass<P>) {
-  // Use type assertion here if you're sure about the compatibility
-  const AnimatePageView = Animated.createAnimatedComponent(
-    Component as unknown as ComponentClass<object>
-  )
+import Animated from "react-native-reanimated";
 
-  type CollapsibleScrollViewProps = P & {
-    index: number
-  }
+import { SceneComponent } from "./scene";
+
+export function createCollapsibleScrollView<
+  P extends ComponentClass<any>,
+  T = any
+>(Component: P) {
+  const AnimatePageView = Animated.createAnimatedComponent(Component);
 
   return React.forwardRef<
-    ForwardRefExoticComponent<CollapsibleScrollViewProps & RefAttributes<ComponentClass<P>>>,
-    CollapsibleScrollViewProps
+    P,
+    T & {
+      index: number;
+    }
   >(function TabViewScene(props, ref) {
-    return <SceneComponent {...props} forwardedRef={ref} ContainerView={AnimatePageView} />
-  })
+    return (
+      <SceneComponent
+        {...props}
+        forwardedRef={ref}
+        ContainerView={AnimatePageView}
+      />
+    );
+  });
 }
